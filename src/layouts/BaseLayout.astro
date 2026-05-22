@@ -1,0 +1,184 @@
+---
+const { title } = Astro.props;
+import Logo from '../components/Logo.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Inter', Arial, sans-serif;
+        margin: 0;
+        background: #ffffff;
+        color: #222;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      /* HEADER */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+
+      nav a {  
+        margin-left: 2rem;  
+        text-decoration: none;  
+        color: #222;  
+        font-size: 1.05rem;
+    }
+    
+    nav a.active {  
+        font-weight: 600;
+    }
+
+      nav a:hover {
+        color: #222;
+        text-decoration: underline; 
+      }
+
+      /* HOMEPAGE */
+      
+    :global(.home) {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+:global(.home h1),
+:global(.page h1) {
+  text-align: center;
+  font-size: 2.5rem;      /* was ~3rem */  
+  font-weight: 500;       /* slightly stronger */  
+  margin-top: 0.5rem;  
+  margin-bottom: 1rem;  
+  letter-spacing: -0.5px;
+}
+
+:global(.home img),
+:global(.page img) {
+  display: block;
+  margin: 2rem auto;   /* more breathing space */
+}
+
+:global(.home p){
+    margin: 2rem auto;      /* was 1.5 → more space */  
+    line-height: 2;         /* was 1.9 → slightly looser */  
+    font-size: 1.1rem;      /* slight increase */  
+    text-align: center;  
+    max-width: 800px;
+}
+
+:global(.page p) {
+    margin: 2rem auto;      /* was 1.5 → more space */  
+    line-height: 2;         /* was 1.9 → slightly looser */  
+    font-size: 1.1rem;      /* slight increase */  
+    text-align: center;  
+    max-width: 800px;
+}
+
+:global(.page) {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+      /* LINKS */
+      :global(a) {
+        color: #3a6fb0;
+        text-decoration: none;
+      }
+
+      :global(a:hover) {
+        color: #2a76c6;
+        text-decoration: underline;
+      }
+
+      :global(a:visited) {  
+        color: #568bcb;
+    }
+
+      /* FOOTER */
+      .connect {
+        text-align: center;
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+        font-size: 0.95rem;
+      }
+
+      .connect a {
+        color: #222;
+      }
+
+      .connect a:visited {  
+        color: #222;
+      }
+
+      .connect a:hover {
+        text-decoration: underline;
+      }
+
+      main {  
+        margin-top: 2rem;
+        display: flex;  
+        align-items: center;  
+        flex-direction: column;
+        padding: 2rem 0;
+    }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <header>
+        <div class="logo">
+        <Logo />
+     </div>
+
+        <nav>  
+            <a href="/about" class={currentPath === "/about" ? "active" : ""}>    
+                About  
+            </a>  
+           
+            <a href="https://scholar.google.com/citations?user=M0JbSRQAAAAJ&hl=en" target="_blank">    
+                Research ↗  
+            </a>  
+            
+            <a href="/links" class={currentPath === "/links" ? "active" : ""}>    
+                Links  
+            </a>
+        </nav>
+
+      </header>
+
+      <main>  
+        <slot />
+    </main>
+
+      <footer class="connect">
+        <p>
+          <a href="https://www.linkedin.com/in/ramsayhelen/" target="_blank">LinkedIn</a>
+        </p>
+      </footer>
+
+    </div>
+  </body>
+</html>
